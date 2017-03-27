@@ -1,4 +1,5 @@
-﻿using Newtonsoft.Json;
+﻿using Bittrex.Data;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -57,12 +58,18 @@ namespace Bittrex
 
         public OrderResponse PlaceBuyOrder(string market, decimal quantity, decimal price)
         {
-            return this.Call<OrderResponse>(ApiCallBuyLimit, Tuple.Create("market", GetMarketName(market)), Tuple.Create("quantity", quantity.ToString()), Tuple.Create("rate", price.ToString()));
+            return this.Call<OrderResponse>(ApiCallBuyLimit, 
+                Tuple.Create("market", GetMarketName(market)),
+                Tuple.Create("quantity", quantity.ToString()),
+                Tuple.Create("rate", price.ToString()));
         }
 
         public OrderResponse PlaceSellOrder(string market, decimal quantity, decimal price)
         {
-            return this.Call<OrderResponse>(ApiCallSellLimit, Tuple.Create("market", GetMarketName(market)), Tuple.Create("quantity", quantity.ToString()), Tuple.Create("rate", price.ToString()));
+            return this.Call<OrderResponse>(ApiCallSellLimit,
+                Tuple.Create("market", GetMarketName(market)),
+                Tuple.Create("quantity", quantity.ToString()),
+                Tuple.Create("rate", price.ToString()));
         }
 
         public decimal CalculateMinimumOrderQuantity(string market, decimal price)
@@ -76,9 +83,9 @@ namespace Bittrex
             return this.Call<dynamic>(ApiCallGetMarkets);
         }
 
-        public dynamic GetTicker(string market)
+        public MarketTicker GetTicker(string market)
         {
-            return this.Call<dynamic>(ApiCallGetTicker, Tuple.Create("market", GetMarketName(market)));
+            return this.Call<MarketTicker>(ApiCallGetTicker, Tuple.Create("market", GetMarketName(market)));
         }
 
         public GetOpenOrdersResponse GetOpenOrders(string market)

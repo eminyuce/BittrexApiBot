@@ -53,6 +53,7 @@
     <Compile Include="Data\AccountBalance.cs" />
     <Compile Include="ApiCall.cs" />
     <Compile Include="ApiCallResponse.cs" />
+    <Compile Include="Data\MarketTicker.cs" />
     <Compile Include="Exchange.cs" />
     <Compile Include="Data\CompletedOrder.cs" />
     <Compile Include="Enums.cs" />

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bittrex.Data;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -13,7 +14,7 @@ namespace Bittrex
         GetBalancesResponse GetBalances();
         decimal CalculateMinimumOrderQuantity(string market, decimal price);
         dynamic GetMarkets();
-        dynamic GetTicker(string market);
+        MarketTicker GetTicker(string market);
         GetOpenOrdersResponse GetOpenOrders(string market);        
         OrderResponse PlaceBuyOrder(string market, decimal quantity, decimal price);
         OrderResponse PlaceSellOrder(string market, decimal quantity, decimal price);

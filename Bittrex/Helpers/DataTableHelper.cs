@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -103,6 +104,11 @@ namespace Bittrex.Helpers
             // Return the finished DataTable
             return table;
         }
+        public static void WriteFile<T>(this IList<T> data,string path)
+        {
+            var dt1 = ToDataTable(data);
+            File.WriteAllText(path, ToPrintConsole(dt1));
+        }
         // remove "this" if not on C# 3.0 / .NET 3.5
         public static DataTable ToDataTable<T>(this IList<T> data)
         {
@@ -130,26 +136,26 @@ namespace Bittrex.Helpers
             var sb = new StringBuilder();
             // Print top line
             Console.WriteLine(new string('-', 75));
-            sb.AppendLine(new string('-', 1500));
+            sb.AppendLine(new string('-', 75));
             // Print col headers
             var colHeaders = dataTable.Columns.Cast<DataColumn>().Select(arg => arg.ColumnName);
             foreach (String s in colHeaders)
             {
                 Console.Write("| {0,-20}", s);
-                sb.Append(String.Format("| {0,-80}", s));
+                sb.Append(String.Format("| {0,-20}", s));
             }
             Console.WriteLine();
             sb.AppendLine();
             // Print line below col headers
             Console.WriteLine(new string('-', 75));
-            sb.AppendLine(new string('-', 1500));
+            sb.AppendLine(new string('-', 75));
             // Print rows
             foreach (DataRow row in dataTable.Rows)
             {
                 foreach (Object o in row.ItemArray)
                 {
                     Console.Write("| {0,-20}", o.ToString());
-                    sb.Append(String.Format("| {0,-80}", o.ToString()));
+                    sb.Append(String.Format("| {0,-20}", o.ToString()));
                 }
                 Console.WriteLine();
                 sb.AppendLine("");
@@ -157,7 +163,7 @@ namespace Bittrex.Helpers
 
             // Print bottom line
             Console.WriteLine(new string('-', 75));
-            sb.AppendLine(new string('-', 1500));
+            sb.AppendLine(new string('-', 75));
 
             return sb.ToString();
         }
