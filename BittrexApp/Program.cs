@@ -16,8 +16,8 @@ namespace BittrexApp
             var ex = new Exchange();
             ex.Initialise(new ExchangeContext()
             {
-                ApiKey = "50058628639a48cc971a0daa9d3397af",
-                Secret = "4ebbeb1d19fd49a29afed7c078a90c82",
+                ApiKey = "",
+                Secret = "",
                 Simulate = false,
                 QuoteCurrency = "BTC"
             });
